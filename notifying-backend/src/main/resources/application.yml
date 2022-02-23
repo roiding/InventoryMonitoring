@@ -1,8 +1,9 @@
+
 spring:
-  mvc:
-    view:
-      prefix: /templates
-      suffix: .html
+#  mvc:
+#    view:
+#      prefix: /templates
+#      suffix: .html
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     name: notifyPool
@@ -30,3 +31,5 @@ spring:
 #          debug: true
 server:
   port: 1096
+  servlet:
+    context-path: /api

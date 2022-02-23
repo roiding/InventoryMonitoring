@@ -1,25 +1,34 @@
 package ran.ding.notifying.controller;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ran.ding.notifying.common.ResponseResult;
+import ran.ding.notifying.entity.SubscribeItem;
 import ran.ding.notifying.service.MailSubscribeService;
+import ran.ding.notifying.service.SubscribeHandler;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
 
-@RestController("/notify")
+@RestController
+@RequestMapping("/subscribe")
 public class UserNotifyingController {
     @Resource
-    private MailSubscribeService mailSubscribeService;
+    private List<SubscribeHandler> subscribeHandlers;
 
-    @RequestMapping("/addNewNotify")
-    public ResponseResult addNewNotifyMail(String mailAddress,int itemId){
-        if (mailSubscribeService.checkMailAddress(mailAddress)) {
-            mailSubscribeService.addNewNotifyMail(mailAddress,itemId);
-            return ResponseResult.buildSuccessResult("新增成功");
-        }else{
-            return ResponseResult.buildErrorResult("500","目前同一邮箱只支持订阅一个商品");
+    @PostMapping("/addNewNotify")
+    @Valid
+    public ResponseResult addNewNotifyMail(@RequestBody SubscribeItem subscribeItem){
+        for (SubscribeHandler subscribeHandler : subscribeHandlers) {
+            if(subscribeHandler.isSupply(subscribeItem)){
+                return subscribeHandler.handleSubscribe(subscribeItem);
+            }
         }
+        return ResponseResult.buildErrorResult("500","未找到对应订阅渠道处理方式，请联系管理员");
+
     }
 
 }

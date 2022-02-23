@@ -11,4 +11,14 @@ public enum CrawlingTypeCodeEnum {
     public int getTypeCode() {
         return typeCode;
     }
+
+    public boolean isEnumEntity(int value){
+        CrawlingTypeCodeEnum[] enumConstants = CrawlingTypeCodeEnum.class.getEnumConstants();
+        for (CrawlingTypeCodeEnum enumConstant : enumConstants) {
+            if(enumConstant.typeCode==value){
+                return true;
+            }
+        }
+        return false;
+    }
 }

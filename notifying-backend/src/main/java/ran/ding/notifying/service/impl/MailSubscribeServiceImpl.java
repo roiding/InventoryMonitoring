@@ -20,8 +20,8 @@ public class MailSubscribeServiceImpl implements MailSubscribeService {
     }
 
     @Override
-    public List<EmailSubscriber> getEmailNotifyerByNotifyId(int notifyId) {
-        return mailSubscribeDao.getEmailNotifyerByNotifyId(notifyId);
+    public List<EmailSubscriber> getEmailSubscribeByNotifyId(int notifyId) {
+        return mailSubscribeDao.getEmailSubscribeByNotifyId(notifyId);
     }
 
     @Override

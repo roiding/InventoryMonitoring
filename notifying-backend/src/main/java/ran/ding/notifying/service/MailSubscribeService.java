@@ -7,7 +7,7 @@ import java.util.List;
 public interface MailSubscribeService {
     void addNewNotifyMail(String mailAddress, int itemId);
 
-    List<EmailSubscriber> getEmailNotifyerByNotifyId(int notifyId);
+    List<EmailSubscriber> getEmailSubscribeByNotifyId(int notifyId);
 
     boolean checkMailAddress(String mailAddress);
 }

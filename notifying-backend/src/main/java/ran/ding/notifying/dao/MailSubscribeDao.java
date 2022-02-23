@@ -18,7 +18,7 @@ public interface MailSubscribeDao {
     @Insert("insert into mail_subscribe(mail_address,notify_id) values (#{mailAddress},#{itemId})")
     void addNewNotifyMail(String mailAddress,int itemId);
 
-    @Select("select id,mail_address,has_mailed,notify_id from mail_notify where mail_subscribe=#{notifyId}")
-    List<EmailSubscriber> getEmailNotifyerByNotifyId(int notifyId);
+    @Select("select id,mail_address,has_mailed,notify_id from mail_subscribe where notify_id=#{notifyId}")
+    List<EmailSubscriber> getEmailSubscribeByNotifyId(int notifyId);
 
 }
