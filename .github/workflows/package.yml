@@ -1,0 +1,58 @@
+name: Docker package
+on:
+  workflow_dispatch: #github页面手动触发
+  push:
+    tags:
+      - "v*.*"
+env:
+  IMAGE_NAME: notifying #这是您的镜像名
+jobs:
+  get-tags:
+    runs-on: ubuntu-20.04
+    env:
+      TZ: Asia/Shanghai
+    outputs:
+      tags: ${{ steps.set-output-id.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: set-output
+        id: set-output-id
+        run: |
+          VERSION=edge
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
+          echo ::set-output name=tags::${VERSION}             
+  push-docker-hub:
+    needs: get-tags
+    runs-on: ubuntu-20.04
+    env:
+      TZ: Asia/Shanghai
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Replace Variable
+        run: |
+        # 替换后端参数
+          sed -i s/@datasource.url@/${{secrets.DATASOURCE_URL}}/g ./notifying-backend/src/main/java/resources/application.yml
+          sed -i s/@datasource.username@/${{secrets.DATASOURCE_USERNAME}}/g ./notifying-backend/src/main/java/resources/application.yml
+          sed -i s/@datasource.password@/${{secrets.DATASOURCE_PASSWORD}}/g ./notifying-backend/src/main/java/resources/application.yml
+          sed -i s/@mail.host@/${{secrets.MAIL_HOST}}/g ./notifying-backend/src/main/java/resources/application.yml
+          sed -i s/@mail.username@/${{secrets.MAIL_USERNAME}}/g ./notifying-backend/src/main/java/resources/application.yml
+          sed -i s/@mail.password@/${{secrets.MAIL_PASSWORD}}/g ./notifying-backend/src/main/java/resources/application.yml
+          sed -i s/@mail.port@/${{secrets.MAIL_PORT}}/g ./notifying-backend/src/main/java/resources/application.yml
+        # 替换前端参数
+          echo SERVE_URL=${{secrets.SERVE_URL}}
+      - name: Build && Push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ needs.get-tags.outputs.tags }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest            
