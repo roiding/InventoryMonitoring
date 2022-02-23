@@ -1,0 +1,32 @@
+spring:
+  mvc:
+    view:
+      prefix: /templates
+      suffix: .html
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    name: notifyPool
+    url: @datasource.url@
+    username: @datasource.username@
+    password: @datasource.password@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 5
+  mail:
+    host: @mail.host@
+    username: @mail.username@
+    password: @mail.password@
+    port: @mail.port@
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+#          debug: true
+server:
+  port: 1096
