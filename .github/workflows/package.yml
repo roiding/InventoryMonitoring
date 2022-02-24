@@ -37,13 +37,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Replace Variable
         run: |
-          sed -i 's|@datasource.url@|${{ secrets.DATASOURCE_URL }}|g' ./notifying-backend/src/main/java/resources/application.yml # 替换后端参数
-          sed -i 's|@datasource.username@|${{ secrets.DATASOURCE_USERNAME }}|g' ./notifying-backend/src/main/java/resources/application.yml
-          sed -i 's|@datasource.password@|${{ secrets.DATASOURCE_PASSWORD }}|g' ./notifying-backend/src/main/java/resources/application.yml
-          sed -i 's|@mail.host@|${{ secrets.MAIL_HOST }}|g' ./notifying-backend/src/main/java/resources/application.yml
-          sed -i 's|@mail.username@|${{ secrets.MAIL_USERNAME }}|g' ./notifying-backend/src/main/java/resources/application.yml
-          sed -i 's|@mail.password@|${{ secrets.MAIL_PASSWORD }}|g' ./notifying-backend/src/main/java/resources/application.yml
-          sed -i 's|@mail.port@|${{ secrets.MAIL_PORT }}|g' ./notifying-backend/src/main/java/resources/application.yml
+          sed -i 's|@datasource.url@|${{ secrets.DATASOURCE_URL }}|g' ./notifying-backend/src/main/resources/application.yml # 替换后端参数
+          sed -i 's|@datasource.username@|${{ secrets.DATASOURCE_USERNAME }}|g' ./notifying-backend/src/main/resources/application.yml
+          sed -i 's|@datasource.password@|${{ secrets.DATASOURCE_PASSWORD }}|g' ./notifying-backend/src/main/resources/application.yml
+          sed -i 's|@mail.host@|${{ secrets.MAIL_HOST }}|g' ./notifying-backend/src/main/resources/application.yml
+          sed -i 's|@mail.username@|${{ secrets.MAIL_USERNAME }}|g' ./notifying-backend/src/main/resources/application.yml
+          sed -i 's|@mail.password@|${{ secrets.MAIL_PASSWORD }}|g' ./notifying-backend/src/main/resources/application.yml
+          sed -i 's|@mail.port@|${{ secrets.MAIL_PORT }}|g' ./notifying-backend/src/main/resources/application.yml
           echo SERVE_URL=${{secrets.SERVE_URL}} >./notifying-fronted/.env.production # 替换前端参数
       - name: Build && Push
         uses: docker/build-push-action@v2
