@@ -41,7 +41,7 @@ public class EmailNotifyStrategy implements NotifyStrategy {
     }
 
     @Override
-    public void checkMailSubscribe(MonitorItem item, int count) {
+    public void checkSubscribe(MonitorItem item, int count) {
         List<EmailSubscriber> subscribers = mailSubscribeService.getEmailSubscribeByNotifyId(item.getId());
         if (subscribers.size() > 0) {
             List<String> notifyAddress = subscribers.stream().map(subscriber -> {

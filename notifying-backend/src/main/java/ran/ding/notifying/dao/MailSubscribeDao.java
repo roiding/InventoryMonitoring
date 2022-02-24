@@ -28,6 +28,6 @@ public interface MailSubscribeDao {
     @Select("select id,mail_address,has_mailed,notify_id from mail_subscribe where notify_id=#{notifyId}")
     List<EmailSubscriber> getEmailSubscribeByNotifyId(int notifyId);
 
-    @Update("update mail_subscribe(has_mailed,notify_id) set has_mailed=has_mailed+1 and notify_id = #{noSubscribeCode}")
-    void cleanSubscriber(List<String> mailAddress,int noSubscribeCode);
+    @Update("<script>update mail_subscribe set has_mailed=has_mailed+1 and notify_id = #{noSubscribeCode} where mailAddress in <foreach collection='mailAddressList'  item='mailAddress' open='(' separator=',' close=')'>#{mailAddress}</foreach></script>")
+    void cleanSubscriber(List<String> mailAddressList,int noSubscribeCode);
 }

@@ -33,7 +33,7 @@ public class CrawAndNotifyThread implements Runnable{
         //有库存，执行推送
         if(count!=0){
             for (NotifyStrategy notifyStrategy : notifyStrategies) {
-                notifyStrategy.checkMailSubscribe(monitorItem,count);
+                notifyStrategy.checkSubscribe(monitorItem,count);
             }
         }
 
