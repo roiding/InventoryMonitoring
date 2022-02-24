@@ -1,6 +1,6 @@
 # 构建前端
 FROM node:alpine3.15 AS fronted
-RUN npm install --global yarn
+RUN npm install --force --global yarn
 WORKDIR ./notifying-fronted
 RUN yarn install && yarn build
 #  构建后台
