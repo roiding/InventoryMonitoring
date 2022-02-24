@@ -13,17 +13,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.5.4</version>
     </parent>
-
-    <properties>
-        <datasource.url>jdbc:mysql://oracle-cloud.ran-ding.ga:3306/yili-babycare-game</datasource.url>
-        <datasource.username>root</datasource.username>
-        <datasource.password>maodou38</datasource.password>
-        <mail.host>smtp-mail.outlook.com</mail.host>
-        <mail.username>no_reply@lzjl.onmicrosoft.com</mail.username>
-        <mail.password>Doq15755</mail.password>
-        <mail.port>587</mail.port>
-    </properties>
-
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

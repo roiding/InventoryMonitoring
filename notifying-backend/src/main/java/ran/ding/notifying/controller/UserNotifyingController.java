@@ -6,15 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ran.ding.notifying.common.ResponseResult;
 import ran.ding.notifying.entity.SubscribeItem;
-import ran.ding.notifying.service.MailSubscribeService;
-import ran.ding.notifying.service.SubscribeHandler;
+import ran.ding.notifying.service.handler.SubscribeHandler;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subscribe")
+@RequestMapping("/api/subscribe")
 public class UserNotifyingController {
     @Resource
     private List<SubscribeHandler> subscribeHandlers;

@@ -31,5 +31,7 @@ spring:
 #          debug: true
 server:
   port: 1096
-  servlet:
-    context-path: /api
+mybatis:
+  #数据表的字段下划线转驼峰开启
+  configuration:
+    map-underscore-to-camel-case: true

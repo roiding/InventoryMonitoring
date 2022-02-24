@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 public class MonitorItemController {
     @Resource
     private MonitorItemService monitorItemService;

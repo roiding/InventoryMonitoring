@@ -19,5 +19,5 @@ public interface NotifyStrategy {
      * @param item
      * @param count
      */
-    void checkMailSubscribe(MonitorItem item, int count);
+    void checkSubscribe(MonitorItem item, int count);
 }
