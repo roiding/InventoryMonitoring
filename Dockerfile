@@ -9,6 +9,6 @@ COPY --from=fronted dist/* ../notifying-backend/src/main/resources/static/
 WORKDIR ../notifying-backend
 RUN maven package
 # 启动容器
-FROM java:8u232-slim
+FROM openjdk:8u232-slim
 COPY ./target/notifying.jar /notifying.jar
 CMD ["java","-jar","/notifying.jar"]
