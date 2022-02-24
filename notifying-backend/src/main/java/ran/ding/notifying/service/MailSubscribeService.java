@@ -10,4 +10,6 @@ public interface MailSubscribeService {
     List<EmailSubscriber> getEmailSubscribeByNotifyId(int notifyId);
 
     boolean checkMailAddress(String mailAddress);
+
+    void cleanSubscriber(List<String> mailAddress);
 }

@@ -34,7 +34,7 @@ public class EmailNotifyStrategy implements NotifyStrategy {
         message.setFrom(environment.getProperty("spring.mail.username"));
         //自己发给自己，通过密送给订阅者
         message.setTo(environment.getProperty("spring.mail.username"));
-        message.setBcc(notifyAddress.stream().collect(Collectors.joining(",")));
+        message.setBcc(notifyAddress.toArray(new String[notifyAddress.size()]));
         message.setSentDate(new Date());
         message.setText(item.getName() + "已补货，请尽快购买，目前库存为:" + count);
         javaMailSender.send(message);
@@ -48,6 +48,8 @@ public class EmailNotifyStrategy implements NotifyStrategy {
                 return subscriber.getMailAddress();
             }).collect(Collectors.toList());
             sendNotify(notifyAddress, item, count);
+            //清理已发送邮件者的订阅信息
+            mailSubscribeService.cleanSubscriber(notifyAddress);
         }
     }
 }

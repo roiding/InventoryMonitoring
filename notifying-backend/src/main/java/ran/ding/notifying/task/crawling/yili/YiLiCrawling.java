@@ -21,7 +21,6 @@ public class YiLiCrawling implements CrawlingStrategy {
     public int runCrawling(MonitorItem item) {
         String html = HttpUtil.get(item.getUrl());
         List<String> countStr = ReUtil.findAll("var giftcount = (\\d+);", html, 1);
-        System.out.println("我在爬.....");
         return Integer.parseInt(countStr.get(0));
     }
 }

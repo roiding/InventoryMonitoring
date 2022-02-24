@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * 数据库的爬取列表有更新的话，refresh
  */
 @RestController
-@RequestMapping("/system")
+@RequestMapping("/api/system")
 public class SystemController {
     @Resource
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;

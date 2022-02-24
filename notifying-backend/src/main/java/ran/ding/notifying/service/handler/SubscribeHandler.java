@@ -1,4 +1,4 @@
-package ran.ding.notifying.service;
+package ran.ding.notifying.service.handler;
 
 import ran.ding.notifying.common.ResponseResult;
 import ran.ding.notifying.entity.SubscribeItem;
