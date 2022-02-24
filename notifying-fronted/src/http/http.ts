@@ -2,7 +2,7 @@ import axios from "axios";
 
 //开始配置axios
 const service = axios.create({
-  baseURL: import.meta.env.SERVE_URL as string,
+  baseURL: 'http://'+import.meta.env.SERVE_URL+'/api' as string,
   timeout: 50000,
 });
 debugger;
