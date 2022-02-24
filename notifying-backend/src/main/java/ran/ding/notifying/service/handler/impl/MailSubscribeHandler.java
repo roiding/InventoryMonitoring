@@ -1,11 +1,11 @@
-package ran.ding.notifying.service.impl;
+package ran.ding.notifying.service.handler.impl;
 
 import org.springframework.stereotype.Component;
 import ran.ding.notifying.common.ResponseResult;
 import ran.ding.notifying.common.SubscribeTypeEnum;
 import ran.ding.notifying.entity.SubscribeItem;
 import ran.ding.notifying.service.MailSubscribeService;
-import ran.ding.notifying.service.SubscribeHandler;
+import ran.ding.notifying.service.handler.SubscribeHandler;
 
 import javax.annotation.Resource;
 

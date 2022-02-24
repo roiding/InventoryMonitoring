@@ -6,6 +6,6 @@ import lombok.Data;
 public class EmailSubscriber {
     private int id;
     private String mailAddress;
-    private String hasMailed;
+    private int hasMailed;
     private int notifyId;
 }
