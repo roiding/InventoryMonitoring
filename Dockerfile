@@ -2,7 +2,7 @@
 FROM node:alpine3.15 AS fronted
 RUN npm install --force --global yarn
 WORKDIR ./notifying-fronted
-RUN yarn install && yarn build
+RUN ls -l&&yarn install && yarn build
 #  构建后台
 FROM maven:3.8.4-openjdk-8-slim AS backend
 COPY --from=fronted dist/* ../notifying-backend/src/main/resources/static/
